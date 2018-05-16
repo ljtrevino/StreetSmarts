@@ -89,7 +89,7 @@
 <div class="row">
     
     <div class="col-6">
-        <div class="card text-white bg-primary">
+        <div class="card text-white bg-info">
           <div class="card-header">POST from Postman with <code>type == CREATE</code></div>
           <div class="card-body">
             <p class="card-text">Upon receiving this command, the database will be deleted if it exists, and recreated from scratch. This is useful so we don't have to try/except catch in every other function, depending on the database status.</p>
@@ -98,7 +98,7 @@
     </div>
     
     <div class="col-6">
-        <div class="card text-white bg-success">
+        <div class="card text-white bg-info">
           <div class="card-header">POST from <code>lamp.ino</code> with a float</div>
           <div class="card-body">
             <p class="card-text">If the status posted from a lamp is a float rather than a string, the code sends a request to the smart lamp API to set the brightness to the number posted.</p>
@@ -111,7 +111,7 @@
 <div class="row" style="margin-top: 30px">
     
     <div class="col-6">
-        <div class="card text-white bg-warning">
+        <div class="card text-white bg-info">
           <div class="card-header">GET from <code>lamp.ino</code></div>
           <div class="card-body">
             <p class="card-text">Here, the ID of the lamp that is requesting is sent, and the function simply returns the current status of the lamp ID that sent the request.</p>
@@ -134,7 +134,7 @@
     
     
     <div class="col-6">
-        <div class="card text-white bg-danger">
+        <div class="card text-white bg-info">
           <div class="card-header">POST from <code>lamp.ino</code> with string</div>
           <div class="card-body">
             <p class="card-text">If the status is a string, the code simply updates the entry in the database for it to reflect the current status. Additionally, if the status posted was FIRE, IDLE, or ACCEPTED, it sends a request to the smart lamp API to update the color accordingly.</p>
@@ -143,7 +143,7 @@
         
         <div style="margin-top: 30px"></div>
         
-        <div class="card text-white bg-light">
+        <div class="card text-white bg-info">
           <div class="card-header">GET from <code>ID_to_arrayNEW.ino</code></div>
           <div class="card-body">
             <p class="card-text">This is the code to control the laser-cut demonstration board with 31 LEDs, so it needs to return each ID that needs to be lit up. The easiest way to parse this in C++ seemed to be just separate IDs by spaces rather than return a string of a Python list. To do so, the function calls the function that would do a GET from `responder.ino` and processes the returned path into IDs with spaces between, then returns that to the ESP32. </p>
@@ -153,7 +153,7 @@
     </div>
     
     <div class="col-6">
-        <div class="card text-white bg-dark">
+        <div class="card text-white bg-info">
           <div class="card-header">GET from <code>responder.ino</code></div>
           <div class="card-body">
             <p class="card-text">This is the trickiest bit of code. First, it queries the database to find out if there are currently any emergencies. If it doesn't find any, it simply returns that there are "No emergencies currently." If there is an emergency, it checks to see if the path has already been calculated to the emergency and saved into the `path` table in the database. If so, it simply returns that path. If not, it sends a request to `pathfinder.py`, asking for the shortest path between the fire station and the location of the fire. Finally, it stores the calculated path in the `path` table of the database so that future GET requests don't have to wait for the entire pathfinder code to run, and can instead immediately return the already-calculated path for next time.</p>
@@ -199,10 +199,6 @@
     <p class="card-text"></p>
   </div>
 </div>
-
-
-
-
 
 
     
