@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Documentation</title>
+	<link rel="stylesheet" type="text/css" href="home.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.1.1/superhero/bootstrap.min.css" rel="stylesheet" integrity="sha384-fiZOWGBt79dIbkt852eb24nKPxYOvAgtp4v4IUFozlwV/WkvlilK1oTVfPorZdV4" crossorigin="anonymous">
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="index.html">StreetSmarts</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarColor03">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="index.html">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="map.html">Real-Time Map</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="documentation.html">Documentation<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="design.html">Design Challenges</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="parts.html">Parts List</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="code.html">Code Description</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="energy.html">Energy Management</a>
+      </li>
+      </ul>
+  </div>
+</nav>
+    
+
+<center><h1>Documentation</h1></center>
+
+<div class="container">
+<p>The project ended up including 5 separate pieces of code, working together to create the interconnected system. There are two server-side files in Python and three pieces of ESP32 code in C++ - for the lamp, responder, and the map demo.</p>
+
+<div class="card bg-dark mb-3" style="">
+  <div class="card-header">emergencyRequest.py</div>
+  <div class="card-body">
+    <p class="card-text">This is the piece of code that ties everything together. It's configured to accept 7 different types of requests, either updating or returning data from a central database for the 31 lamps. The database has a row for each lamp, and looks something like this:</p>
+    <table class="table table-striped table-bordered">
+    <thead>
+        <tr class="table-dark">
+            <th>ID</th>
+            <th>Status</th>
+            <th>Timestamp</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>0</td>
+            <td>IDLE</td>
+            <td>18:56</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>FIRE</td>
+            <td>21:34</td>
+        </tr>
+        <tr>
+            <td>...</td>
+            <td>...</td>
+            <td>...</td>
+        </tr>
+        <tr>
+            <td>30</td>
+            <td>IDLE</td>
+            <td>18:56</td>
+        </tr>
+    </tbody>
+</table>
+  </div>
+</div>
+
+<center><p>Here's an outline of the types of requests it can receive, and what it returns/updates with them:</p></center>
+
+<div class="row">
+    
+    <div class="col-6">
+        <div class="card text-white bg-primary">
+          <div class="card-header">POST from Postman with <code>type == CREATE</code></div>
+          <div class="card-body">
+            <p class="card-text">Upon receiving this command, the database will be deleted if it exists, and recreated from scratch. This is useful so we don't have to try/except catch in every other function, depending on the database status.</p>
+          </div>
+        </div>
+    </div>
+    
+    <div class="col-6">
+        <div class="card text-white bg-success">
+          <div class="card-header">POST from <code>lamp.ino</code> with a float</div>
+          <div class="card-body">
+            <p class="card-text">If the status posted from a lamp is a float rather than a string, the code sends a request to the smart lamp API to set the brightness to the number posted.</p>
+          </div>
+        </div>
+    </div>
+    
+</div>
+    
+<div class="row" style="margin-top: 30px">
+    
+    <div class="col-6">
+        <div class="card text-white bg-warning">
+          <div class="card-header">GET from <code>lamp.ino</code></div>
+          <div class="card-body">
+            <p class="card-text">Here, the ID of the lamp that is requesting is sent, and the function simply returns the current status of the lamp ID that sent the request.</p>
+          </div>
+        </div>
+    </div>
+    
+    <div class="col-6">
+        <div class="card text-white bg-info">
+          <div class="card-header">POST from <code>responder.ino</code></div>
+          <div class="card-body">
+            <p class="card-text">This code allows the responder ESP32 module to be able to accept requets for help, and updates entries in the database to reflect that.</p>
+          </div>
+        </div>
+    </div>
+    
+</div>
+    
+<div class="row" style="margin-top: 30px">
+    
+    
+    <div class="col-6">
+        <div class="card text-white bg-danger">
+          <div class="card-header">POST from <code>lamp.ino</code> with string</div>
+          <div class="card-body">
+            <p class="card-text">If the status is a string, the code simply updates the entry in the database for it to reflect the current status. Additionally, if the status posted was FIRE, IDLE, or ACCEPTED, it sends a request to the smart lamp API to update the color accordingly.</p>
+          </div>
+        </div>
+        
+        <div style="margin-top: 30px"></div>
+        
+        <div class="card text-white bg-light">
+          <div class="card-header">GET from <code>ID_to_arrayNEW.ino</code></div>
+          <div class="card-body">
+            <p class="card-text">This is the code to control the laser-cut demonstration board with 31 LEDs, so it needs to return each ID that needs to be lit up. The easiest way to parse this in C++ seemed to be just separate IDs by spaces rather than return a string of a Python list. To do so, the function calls the function that would do a GET from `responder.ino` and processes the returned path into IDs with spaces between, then returns that to the ESP32. </p>
+          </div>
+        </div>
+        
+    </div>
+    
+    <div class="col-6">
+        <div class="card text-white bg-dark">
+          <div class="card-header">GET from <code>responder.ino</code></div>
+          <div class="card-body">
+            <p class="card-text">This is the trickiest bit of code. First, it queries the database to find out if there are currently any emergencies. If it doesn't find any, it simply returns that there are "No emergencies currently." If there is an emergency, it checks to see if the path has already been calculated to the emergency and saved into the `path` table in the database. If so, it simply returns that path. If not, it sends a request to `pathfinder.py`, asking for the shortest path between the fire station and the location of the fire. Finally, it stores the calculated path in the `path` table of the database so that future GET requests don't have to wait for the entire pathfinder code to run, and can instead immediately return the already-calculated path for next time.</p>
+          </div>
+        </div>
+    </div>
+    
+</div>
+
+<div class="card bg-dark mb-3" style="margin-top: 50px">
+  <div class="card-header">lamp.ino</div>
+  <div class="card-body">
+    <p class="card-text">The gist of this code is just to control the lamp via inputs of motion detection, voice recognition, and buttons, and then display the relevant information on the screen.</p>
+  </div>
+</div>
+
+<h3>motion detection</h3>
+
+<p>stuff</p>
+
+<h3>voice detection</h3>
+
+<p>stuff</p>
+
+<h3>Dimming control</h3>
+
+<p>When motion isn't detected for 10 seconds, `lamp.ino` sends a request to the server code to set the lamp brightness to 0.1. If it then detects motion again, it sends a request to set the brightness to 0.5 (100% brightness was way too bright for something so close to our eyes ha</p>
+    
+</div>
+</body>
+<script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+</html>
