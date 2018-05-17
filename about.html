@@ -44,26 +44,22 @@
   </div>
 </nav>
 
-<div class="container" style="transform: scale(.8)">
+    <center><h1>About the Creators</h1></center>
     
-    <div onclick="changeColor()" id="lamp" class="white" style="height:500px; width:500px"></div>
-    <div id="name" class="whiteN" style="height:335px;"></div>
+<div class="container">
+    <p> We are a group of four MIT students that created this project for 6.08, Introduction to EECS via Interconnected Systems.</p>
     
+    
+    <div class="row">
+    
+        <div class="col-3"><center><img style="border-radius: 50%;" src="Kye.jpg"/><h3>Kye Burchard</h3><p>Major: 6-2</p><p>kyeb@mit.edu</p></center></div>
+        <div class="col-3"><center><img style="border-radius: 50%;" src="linnear.jpg"/><h3>Linnea Ryander</h3><p>Major: 6-3</p><p>linnear@mit.edu</p></center></div>
+        <div class="col-3"><center><img style="border-radius: 50%;" src="Kye.jpg"/><h3>Babu-Abel Wanyeki</h3><p>Major: 6-2</p><p>bwanyeki@mit.edu</p></center></div>
+        <div class="col-3"><center><img style="border-radius: 50%;" src="linnear.jpg"/><h3>Viktor Urvantsev</h3><p>Major: 6-2</p><p>viktoru@mit.edu</p></center></div>
+    
+    </div>
 </div>
     
-<script>
-    
-var colors = ["white", "yellow", "red"];
-var names = ["whiteN", "yellowN", "redN"];
-var color_index = 0;
 
-function changeColor(){
-    color_index += 1;
-    color_index %= 3;
-    document.getElementById("lamp").setAttribute("class", colors[color_index]);
-    document.getElementById("name").setAttribute("class", names[color_index]);
-};
-    
-</script>
 </body>
 </html>

@@ -37,6 +37,9 @@
       <li class="nav-item">
         <a class="nav-link" href="energy.html">Energy Management</a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="about.html">About the Creators</a>
+      </li>
       </ul>
   </div>
 </nav>
@@ -176,14 +179,15 @@
 <div class="card-text">
     <p>The gist of this code is just to control the lamp via inputs of motion detection, voice recognition, and buttons, and then display the relevant information on the screen.</p>
     <h5>Motion Detection</h5>
-      <p>stuff</p>
+      <p>The ultrasound sensor is put to use here. If the sensor reports back a ultrasound  response of a low enough time, indicating the distance of an object that the sound bounces off of is within a certain threshold, the isDetected function returns back a 1. Otherwise, it returns a 0. So really, this isn’t motion detection, it is distance detection. Nonetheless, if you go in front of it, it senses that you’re there, and the microphone turns on.
+</p>
       
     <h5>Voice Detection</h5>
-      <p>stuff</p>
+      <p>The voice detection is done by a microphone attached to the system. Once you start speaking, the sound vibrates a piece of the microphone, which reports back raw audio readings. The readings are stored, then sent to the Google Speech API to be processed, which is currently parametrized to return words in English. The current keyphrase for the demo is “fire fire fire”, which then engages the emergency post.</p>
       
     <h5>Dimming Control</h5>
 
-<p>When motion isn't detected for 10 seconds, `lamp.ino` sends a request to the server code to set the lamp brightness to 0.1. If it then detects motion again, it sends a request to set the brightness to 0.5 (100% brightness was way too bright for something so close to our eyes ha</p>
+<p>When motion isn't detected for 10 seconds, `lamp.ino` sends a request to the server code to set the lamp brightness to 0.1. If it then detects motion again, it sends a request to set the brightness to 0.5 (100% brightness was way too bright for something so close to our eyes)</p>
   </div>
 </div>
 </div>
