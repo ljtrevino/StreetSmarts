@@ -12,14 +12,14 @@
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <a class="navbar-brand" href="index.html">StreetSmarts</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
+  <button onclick="navbar()" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
   <div class="collapse navbar-collapse" id="navbarColor03">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
-        <a class="nav-link" href="index.html">Home</a>
+      <li class="nav-item active">
+        <a class="nav-link" href="index.html">Home<span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="map.html">Real-Time Map</a>
@@ -30,8 +30,8 @@
       <li class="nav-item">
         <a class="nav-link" href="design.html">Design Challenges</a>
       </li>
-      <li class="nav-item active">
-        <a class="nav-link" href="parts.html">Parts List<span class="sr-only">(current)</span></a>
+      <li class="nav-item">
+        <a class="nav-link" href="parts.html">Parts List</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="code.html">Code Description</a>
@@ -45,7 +45,6 @@
       </ul>
   </div>
 </nav>
-
 <center><h1>Additional Parts List</h1></center>
     
 <div class="container" style="margin-top:10px;">
@@ -97,4 +96,18 @@
 </div>
     
 </body>
+<script>
+    
+  function navbar() {
+    var x = document.getElementById("navbarColor03");
+    if (x.className === "collapse navbar-collapse") {
+        x.className = "navbar-collapse";
+    } else {
+        x.className = "collapse navbar-collapse";
+    } 
+   }  
+    
+</script>    
+    
+    
 </html>
