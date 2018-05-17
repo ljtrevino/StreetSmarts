@@ -207,12 +207,14 @@
 
 <h4>Dijkstra Shortest Path Algorithm</h4>
 <p>
-   LINNEA WILL DO THIS PART 
+Essentially, we construct a graph where every lamp post represents a node in the graph and the roads connecting lamps represent the edges of the graph.  The edge weights of the graph are the amount of time in seconds it takes to get from one lamp to another based on current traffic conditions.  Since these edge weights will always be positive and there can be cycles in the graph, the most efficient algorithm is Dijkstra which can run in O(VlogV+E) time if we use a Binary Heap (assuming that the number of edges is asymptotically equal to the number of nodes).  The code is shown below:
 </p>
+    
+<center><img style="margin-bottom: 20px" src="dijkstra.jpg"/></center>
     
 <h4>Pathfinding with Google Distance Matrix API</h4> 
 <p>
-    LINNEA WILL DO THIS PART 
+    We used the Google Distance Matrix API to create an adjacency matrix for all the edge weights.  Since this graph must be directed (as traffic can be faster in one direction compared to another), the adjacency matrix is not necessarily symmetric.  Basically, for every known road connection (indicated as a 1 in the initialization matrix), we perform a request to the Google Distance Matrix API and parse the JSON to determine what the current duration is.  We then insert this value to the adjacency matrix in the corresponding location.
 </p> 
     
   </div>
@@ -229,10 +231,10 @@
     
 <div class="row">
         <div class="col">
-            <center><img src="charlieplexing11.png"></center>
+            <center><img src="Charlieplexing11.png"></center>
         </div>
         <div class="col">
-            <center><img src="charlieplexing22.png"></center>
+            <center><img src="Charlieplexing22.png"></center>
         </div>
 </div>
   </div>
