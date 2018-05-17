@@ -46,45 +46,48 @@
 <div class="container">
 <p>The project ended up including 5 separate pieces of code, working together to create the interconnected system. There are two server-side files in Python and three pieces of ESP32 code in C++ - for the lamp, responder, and the map demo.</p>
 
-<div class="card bg-dark mb-3" style="">
-  <div class="card-header">emergencyRequest.py</div>
-  <div class="card-body">
+<div onclick="ExpandER()" class="card bg-info mb-3" style="">
+  <div class="card-header bg-dark">emergencyRequest.py</div>
+  <div class="card-body" id="ExpandER2" style="display:none;">
     <p class="card-text">This is the piece of code that ties everything together. It's configured to accept 7 different types of requests, either updating or returning data from a central database for the 31 lamps. The database has a row for each lamp, and looks something like this:</p>
-    <table class="table table-striped table-bordered">
+    <center>
+      <table class="table table-striped table-bordered bg-dark" style="max-width: 30vw">
     <thead>
-        <tr class="table-dark">
+        <tr class="table-dark" style="text-align: center;">
             <th>ID</th>
             <th>Status</th>
             <th>Timestamp</th>
         </tr>
     </thead>
     <tbody>
-        <tr>
+        <tr style="text-align: center;">
             <td>0</td>
             <td>IDLE</td>
             <td>18:56</td>
         </tr>
-        <tr>
+        <tr style="text-align: center;">
             <td>4</td>
             <td>FIRE</td>
             <td>21:34</td>
         </tr>
-        <tr>
+        <tr style="text-align: center;">
             <td>...</td>
             <td>...</td>
             <td>...</td>
         </tr>
-        <tr>
+        <tr style="text-align: center;">
             <td>30</td>
             <td>IDLE</td>
             <td>18:56</td>
         </tr>
     </tbody>
 </table>
+</center>
   </div>
 </div>
 
-<center><p>Here's an outline of the types of requests it can receive, and what it returns/updates with them:</p></center>
+<div id="ExpandER" style="display: none;">
+    <center><p>Here's an outline of the types of requests it can receive, and what it returns/updates with them:</p></center>
 
 <div class="row">
     
@@ -162,11 +165,16 @@
     </div>
     
 </div>
-
-<div class="card bg-dark mb-3" style="margin-top: 50px">
-  <div class="card-header">lamp.ino</div>
-  <div class="card-body">
-    <p class="card-text">The gist of this code is just to control the lamp via inputs of motion detection, voice recognition, and buttons, and then display the relevant information on the screen.</p>
+    
+    
+    
+</div>
+    
+<div onclick="ExpandLamp()" class="card text-white bg-success mb-3" style="margin-top: 50px">
+  <div class="card-header bg-dark">lamp.ino</div>
+  <div class="card-body" id="lamp" style="display:none;">
+<div class="card-text">
+    <p>The gist of this code is just to control the lamp via inputs of motion detection, voice recognition, and buttons, and then display the relevant information on the screen.</p>
     <h5>Motion Detection</h5>
       <p>stuff</p>
       
@@ -178,20 +186,59 @@
 <p>When motion isn't detected for 10 seconds, `lamp.ino` sends a request to the server code to set the lamp brightness to 0.1. If it then detects motion again, it sends a request to set the brightness to 0.5 (100% brightness was way too bright for something so close to our eyes ha</p>
   </div>
 </div>
+</div>
     
-<div class="card bg-dark mb-3" style="margin-top: 50px">
-  <div class="card-header">responder.ino</div>
-  <div class="card-body">
-    <p class="card-text"></p>
+   
+<div onclick="ExpandResponder()" class="card text-white bg-warning mb-3" style="margin-top: 50px">
+  <div class="card-header bg-dark">responder.ino</div>
+  <div class="card-body" id="responder" style="display:none;">
+<div class="card-text">
+    
+      <p>The C++ code on the responder device doesn’t do much on its own. Rather, it relies heavily upon data and computation from the server side. After initializing, the ESP32 sends a GET request to emergencyRequest.py on the server. The server then returns either “No emergencies currently” or, if there is an emergency, a path from the responder’s location to the emergency in the form of a Python list of lamp IDs. The path calculated from pathfinder.py via the Google Distance Matrix API and a Dijkstra algorithm, along with connection information and time since it last synced with the server, is displayed in a UI on the OLED. This process is repeated every 5 seconds, displaying the relevant information so a firefighter would quickly see an emergency and be able to navigate directly to it. Additionally, upon a long press, this code has the ability to “accept” an emergency. This fires off a request to the server and updates the status in the database to “ACCEPTED,” allowing those nearby the emergency to immediately know when help is on the way. 
+</p>
+  </div>
+</div>
+</div>
+    
+<div onclick="ExpandPath()" class="card text-white bg-primary mb-3" style="margin-top: 50px">
+  <div class="card-header bg-dark">pathfinder.py</div>
+  <div class="card-body" id="pathfinder" style="display:none;">
+<div class="card-text">
+
+<h4>Dijkstra Shortest Path Algorithm</h4>
+<p>
+   LINNEA WILL DO THIS PART 
+</p>
+    
+<h4>Pathfinding with Google Distance Matrix API</h4> 
+<p>
+    LINNEA WILL DO THIS PART 
+</p> 
+    
+  </div>
+</div>
+</div>
+    
+<div onclick="ExpandID()" class="card text-white bg-light mb-3" style="margin-top: 50px">
+  <div class="card-header bg-dark">IDtoArrayNEW.ino</div>
+  <div class="card-body" id="ID" style="display:none;">
+<div class="card-text">
+    
+      <p>The purpose of this file is to be the code that runs on the miniature map and to be able to configure the LED path depending on the current most efficient path calculated by the dijkstra algorithm. In this file we assume that the LEDs are already connected to their respective pins but we also had to remember that we have 15 LEDs that were controlled with the Charlieplexer circuit. To start, we had to first initialize all of the regular pins to OUTPUT. This will ensure that we will set all of the LED values initially to LOW and enable us to control the pins later on in the program. As for the 5 Charlie-Plexer pins we have to set those to INPUT in order for them to initially have no defined polarity. After the intilizations, the program will then send a GET request every 5 seconds to update the map. When new information comes in, the data comes in as ID numbers. These ID numbers are then parsed and put one at a time into an already existing list of values called ID. One problem with the CharliePlexer is that out of all of the pins that it controls, only one can be turned on at a time. This means that in order to keep all of the pins looking like they’re continuously on we had to cycle through them. To facilitate this functionality we created a function called LedsIncrement which takes in one argument which is the index of the ID list. This value at this ID index is then mapped to an actual pin(the ID to pin map is shown below) and then activated. This function was put anywhere where there is a loop in order to make sure that no blocking statements would be able to delay the cycling of LEDs and make the LEDs look as though there were blinking. In addition an extra function needed to be written in order to be be able to turn on the CharliePlexer LEDs which involves resetting some of the 5 pins to INPUT, and setting the right pins to HIGH and the other ones to LOW to change the path of electricity.
+</p>
+    
+<div class="row">
+        <div class="col">
+            <center><img src="Charlieplexing11.png"></center>
+        </div>
+        <div class="col">
+            <center><img src="Charlieplexing22.png"></center>
+        </div>
+</div>
   </div>
 </div>
     
-<div class="card bg-dark mb-3" style="margin-top: 50px">
-  <div class="card-header">pathfinder.py</div>
-  <div class="card-body">
-    <p class="card-text"></p>
-  </div>
-</div>
+<!--
     
 <div class="card bg-dark mb-3" style="margin-top: 50px">
   <div class="card-header">IDtoArrayNEW.ino</div>
@@ -199,10 +246,66 @@
     <p class="card-text"></p>
   </div>
 </div>
+-->
 
 
     
 </div>    
-    
 </body>
+    
+<script>
+    
+function ExpandER() {
+    var ERdiv = document.getElementById("ExpandER");
+    if (ERdiv.style.display === "none") {
+        ERdiv.style.display = "block";
+    } else {
+        ERdiv.style.display = "none";
+    }
+    var ERdiv2 = document.getElementById("ExpandER2");
+    if (ERdiv2.style.display === "none") {
+        ERdiv2.style.display = "block";
+    } else {
+        ERdiv2.style.display = "none";
+    }
+}    
+    
+function ExpandID() {
+    var x = document.getElementById("ID");
+    if (x.style.display === "none") {
+        x.style.display = "block";
+    } else {
+        x.style.display = "none";
+    }
+}   
+    
+function ExpandResponder() {
+    var x = document.getElementById("responder");
+    if (x.style.display === "none") {
+        x.style.display = "block";
+    } else {
+        x.style.display = "none";
+    }
+} 
+    
+function ExpandLamp() {
+    var x = document.getElementById("lamp");
+    if (x.style.display === "none") {
+        x.style.display = "block";
+    } else {
+        x.style.display = "none";
+    }
+} 
+   
+function ExpandPath() {
+    var x = document.getElementById("pathfinder");
+    if (x.style.display === "none") {
+        x.style.display = "block";
+    } else {
+        x.style.display = "none";
+    }
+} 
+    
+</script>    
+    
 </html>

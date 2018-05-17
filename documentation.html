@@ -48,34 +48,86 @@
 <h2>Overview</h2>
     
 <p>StreetSmarts is a series of smart street lights that can be used to map optimal routes emergency responders should through take though a city.  Let's say there's a guy named Joe who witnesses a nearby car crash where both cars involved catch on fire.  Joe forgot his phone at work, so he runs toward the nearest smart street lamp and yells "FIRE, FIRE, FIRE".  When the lamp unit detects motion, it begins recording and uses his voice commands to contact the nearest fire department.  At the Cambridge Fire Station, a woman named Stephanie accepts the request for help and sends a team of firefighters to help.  After running an algorithm to determine the quickest route to the car crash, the street lamps along that route light up.  This helps the firefighters know where to go, and also alerts drivers that an emergency vehicle will be coming soon so that they can clear the way for the emergency vehicle.  In record time, the firefighters reach the crash site, extinguish the fire, and save the lives of the people in the cars.</p>
+    
+   <center> <iframe width="560" height="315" src="https://www.youtube.com/embed/yxqBb4jaiFQ?rel=0&amp;showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe> </center>
 
 <div style="margin-bottom: 40px"></div>
     
-<u><h2> The Miniature Map </h2></u>
+<div onclick="ExpandMM()" class="card bg-dark mb-3" style="">
+  <div class="card-header bg-dark">The Miniature Map</div>
+  <div class="card-body" id="minimap" style="display:none;">
+<div class="card-text">
     
-<p>The mini map is a model indicating which street lamps would light up in the shortest path to an emergency location.  It is an actual map of the area north of the MIT campus along Massachuestts Avenue.</p>
-    
-<h4> Fabrication </h4>
+<h4><u> Summary </u></h4>
+      <p>The mini map is a model indicating which street lamps would light up in the shortest path to an emergency location.  It is an actual map of the area north of the MIT campus along Massachuestts Avenue.</p>
+        
+<h4><u> Fabrication </u></h4>
     <p>The map itself was laser raster engraved and the box below was laser cut. All the faces except the top face of the box are glued together so that the wiring and ESP can easily be accessed by lifting off the top of the box.  The holes for the LEDs are also laser cut.</p>
 
-<h4> Wiring </h4>
-    <p>BABU'S DESCRIPTION OF CHARLIEPLEXING AND WIRING</p>
+    <center><img src="minimapresized.jpg"/></center>
     
-    <u><h2> The Lamp Model </h2></u>
+<h4><u> Wiring </u></h4>
+    <p>The ESP has 21 usable pins that can be utilized to work as simple GPIOs. This is because some of the pins are devoted to restart and indication functionality.  Given that we have 31 lamp post IDs,  the first 16 GPIO pins were connected directly to the LEDs, but the last 5 pins needed to be charlieplexed in order to control the remaining 15 LEDs.  Charlieplexing exploits the fact that LEDs can only operate in one direction due to the nature of them being a diode. So if you organize LEDs in a specific pattern you can ensure that you are able to turn on a specific LED if you are careful about the coding. The 5 control pins for the Charlieplexer were pin 13, pin 14,  pin 2, pin 16,  and pin 17. These pins correspond to the diagram below respectively as pin 1, pin 2, pin 3, pin 4, and pin 5 and it details specifically how the connections are made. Note that with 5 pins we could have theoretically been able to control 5*(5-1) pins but we only needed 15 pins to control the 15 LEDs, so not all of them were used, only LED7-LED20(inclusive) were used.</p>
     
-<h4>The LightBulb</h4>
-    <p> Description </p>
+    <center><img src="wiringimageresized.jpg"/></center>
     
-<h4>The Distance Sensor</h4>
-    <p> Description </p>
+    </div>
+  </div>
+</div>
     
     
+<div onclick="ExpandLM()" class="card bg-light mb-3" style="">
+  <div class="card-header bg-dark">The Lamp Model</div>
+  <div class="card-body" id="lampmodel" style="display:none;">
+<div class="card-text">
     
+<h4><u> Summary </u></h4>
+      <p>The lamp model is a life-size model of the actual street lamp unit.  It consists of a LIFX lightbulb, ESP32, microphone, distance sensor, and OLED.  The lightbulb and distance sensor are covered in further detail below.</p>
+    
+<div class="row">
+        <div class="col">
+            <center><img src="lampside.jpg"></center>
+        </div>
+        <div class="col">
+            <center><img src="lampabove.jpg"></center>
+        </div>
+</div>
+        
+<h4 style="margin-top:20px"><u> LightBulb </u></h4>
+    <p>The light bulb that we used was the LIFX A19 LED Light because of its straightforward API interface, programmable features, as well as its affordable price. To use the API we needed to make a LIFX account, register the bulb, and then create an API key that would be used to control it. The Bulb was attached to a portable power supply that could be plugged into an outlet. In addition a small breadboard containing an ESP, Button, Distance Sensor, Microphone, and OLED was attached to the power supply to facilitate wireless communication. Because the Bulb had an API, all that was needed to create a connection was to establish a WiFi interface with a cell phone or another personal device. Following that all of the requests to control the bulb was sent over the API with a simple python script. Using the script we were then able to control different aspects of the Lamp including the brightness, the color, and whether the bulb was on or off.
+</p>
+
+    
+<h4><u> Distance Sensor </u></h4>
+    <p>The distance sensor that we used for this project was the HC-SR04 Ultrasonic sensor. The sensor works by continuously sending echo pulses and then measures when the pulses come back in order to tell the distance it is from an object. The purpose of this sensor was to be able to detect how far a person was from the light bulb in order to determine whether speech requests would be sent to the Google API. This functionality was actually very useful as it enabled us to be able to save power by not continuously polling and sending sound to the Google API, which could sometimes be very slow, as well as enabling us to be able to dim the Light Bulb whenever no distance was detected(with an acceptable set timeout period).</p>
+    
+    </div>
+  </div>
+</div>
 
     
 </div>
     
     
 </body>
-<script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+
+<script>
+   function ExpandMM() {
+    var minimap = document.getElementById("minimap");
+    if (minimap.style.display === "none") {
+        minimap.style.display = "block";
+    } else {
+        minimap.style.display = "none";
+    } 
+   }
+    
+function ExpandLM() {
+    var lampmodel = document.getElementById("lampmodel");
+    if (lampmodel.style.display === "none") {
+        lampmodel.style.display = "block";
+    } else {
+        lampmodel.style.display = "none";
+    } 
+   }
+</script>
 </html>

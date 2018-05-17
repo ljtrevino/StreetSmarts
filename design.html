@@ -43,5 +43,51 @@
 
 <center><h1>Design Challenges</h1></center>
     
+<div class="container">
+<p>There were a series of challenges we encountered during this project, here we highlight a few of the most difficult aspects of our project</p>
+
+<div onclick="ExpandIO()" class="card bg-danger mb-3" style="">
+  <div class="card-header bg-dark">Wiring of the Board & I/O Pins</div>
+  <div class="card-body" id="IO" style="display:none;">
+    
+      <p class="card-text"> [INSERT TEXT HERE] </p>
+      
+  </div>
+</div>
+
+
+    
+<div onclick="ExpandAPI()" class="card bg-primary mb-3" style="">
+  <div class="card-header bg-dark">Efficiency & APIs</div>
+  <div class="card-body" id="API" style="display:none;">
+    
+      <p class="card-text"> [INSERT TEXT HERE] </p>
+      
+  </div>
+</div>
+    
+</div>
 </body>
+<script>
+    
+function ExpandIO() {
+    var x = document.getElementById("IO");
+    if (x.style.display === "none") {
+        x.style.display = "block";
+    } else {
+        x.style.display = "none";
+    }
+} 
+    
+function ExpandAPI() {
+    var x = document.getElementById("API");
+    if (x.style.display === "none") {
+        x.style.display = "block";
+    } else {
+        x.style.display = "none";
+    }
+} 
+    
+</script>
+    
 </html>
