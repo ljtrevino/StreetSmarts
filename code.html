@@ -93,7 +93,7 @@
     
     <div class="col-6">
         <div class="card text-white bg-info">
-          <div class="card-header">POST from Postman with <code>type == CREATE</code></div>
+          <div class="card-header">POST from Postman with <code style="color:whitesmoke">type == CREATE</code></div>
           <div class="card-body">
             <p class="card-text">Upon receiving this command, the database will be deleted if it exists, and recreated from scratch. This is useful so we don't have to try/except catch in every other function, depending on the database status.</p>
           </div>
@@ -102,7 +102,7 @@
     
     <div class="col-6">
         <div class="card text-white bg-info">
-          <div class="card-header">POST from <code>lamp.ino</code> with a float</div>
+          <div class="card-header">POST from <code style="color:whitesmoke">lamp.ino</code> with a float</div>
           <div class="card-body">
             <p class="card-text">If the status posted from a lamp is a float rather than a string, the code sends a request to the smart lamp API to set the brightness to the number posted.</p>
           </div>
@@ -115,7 +115,7 @@
     
     <div class="col-6">
         <div class="card text-white bg-info">
-          <div class="card-header">GET from <code>lamp.ino</code></div>
+          <div class="card-header">GET from <code style="color:whitesmoke">lamp.ino</code></div>
           <div class="card-body">
             <p class="card-text">Here, the ID of the lamp that is requesting is sent, and the function simply returns the current status of the lamp ID that sent the request.</p>
           </div>
@@ -124,7 +124,7 @@
     
     <div class="col-6">
         <div class="card text-white bg-info">
-          <div class="card-header">POST from <code>responder.ino</code></div>
+          <div class="card-header">POST from <code style="color:whitesmoke">responder.ino</code></div>
           <div class="card-body">
             <p class="card-text">This code allows the responder ESP32 module to be able to accept requets for help, and updates entries in the database to reflect that.</p>
           </div>
@@ -138,7 +138,7 @@
     
     <div class="col-6">
         <div class="card text-white bg-info">
-          <div class="card-header">POST from <code>lamp.ino</code> with string</div>
+          <div class="card-header">POST from <code style="color:whitesmoke">lamp.ino</code> with string</div>
           <div class="card-body">
             <p class="card-text">If the status is a string, the code simply updates the entry in the database for it to reflect the current status. Additionally, if the status posted was FIRE, IDLE, or ACCEPTED, it sends a request to the smart lamp API to update the color accordingly.</p>
           </div>
@@ -147,7 +147,7 @@
         <div style="margin-top: 30px"></div>
         
         <div class="card text-white bg-info">
-          <div class="card-header">GET from <code>ID_to_arrayNEW.ino</code></div>
+          <div class="card-header">GET from <code style="color:whitesmoke">ID_to_arrayNEW.ino</code></div>
           <div class="card-body">
             <p class="card-text">This is the code to control the laser-cut demonstration board with 31 LEDs, so it needs to return each ID that needs to be lit up. The easiest way to parse this in C++ seemed to be just separate IDs by spaces rather than return a string of a Python list. To do so, the function calls the function that would do a GET from `responder.ino` and processes the returned path into IDs with spaces between, then returns that to the ESP32. </p>
           </div>
@@ -157,7 +157,7 @@
     
     <div class="col-6">
         <div class="card text-white bg-info">
-          <div class="card-header">GET from <code>responder.ino</code></div>
+          <div class="card-header">GET from <code style="color:whitesmoke">responder.ino</code></div>
           <div class="card-body">
             <p class="card-text">This is the trickiest bit of code. First, it queries the database to find out if there are currently any emergencies. If it doesn't find any, it simply returns that there are "No emergencies currently." If there is an emergency, it checks to see if the path has already been calculated to the emergency and saved into the `path` table in the database. If so, it simply returns that path. If not, it sends a request to `pathfinder.py`, asking for the shortest path between the fire station and the location of the fire. Finally, it stores the calculated path in the `path` table of the database so that future GET requests don't have to wait for the entire pathfinder code to run, and can instead immediately return the already-calculated path for next time.</p>
           </div>
@@ -231,10 +231,10 @@ Essentially, we construct a graph where every lamp post represents a node in the
     
 <div class="row">
         <div class="col">
-            <center><img src="Charlieplexing11.png"></center>
+            <center><img src="charlieplexing11.png"></center>
         </div>
         <div class="col">
-            <center><img src="Charlieplexing22.png"></center>
+            <center><img src="charlieplexing22.png"></center>
         </div>
 </div>
   </div>

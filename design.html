@@ -61,7 +61,12 @@
   <div class="card-header bg-dark">Efficiency & APIs</div>
   <div class="card-body" id="API" style="display:none;">
     
-      <p class="card-text"> [INSERT TEXT HERE] </p>
+      <p class="card-text">
+    One difficult challenge was getting the Google Distance Matrix API to work when requesting multiple locations in one request. The Google Distance Matrix API was designed to find routes to and from every point imputed, so it was not possible to only get paths between specific start and end locations if there were multiple locations in the request.  For example, if I wanted to find the travel time from A → B and from C → D I would make a request with <code style="color:whitesmoke">origins = [A,C]</code> and <code style="color:whitesmoke">destinations = [B,D]</code>.  However, rather than return the two paths I wanted, the API would return durations A → B, A → D, C → D, and A → D.  As you can imagine, with a larger number of origins and destinations, there are a many unnecessary duration values returned.  Furthermore, parsing through this data to try to find select routes can be quite difficult depending on how many origins and destinations in a request, and how you order these locations.  Thus, instead we performed many individual requests, which simplified parsing the data and ensured that the API didn’t do extra work of getting travel durations between points that we would never need.  Due to the sheer number of requests, initializing the adjacency matrix takes about 8 seconds on average.  However, in the grand scheme of things, it would take more than 8 seconds for responders to get in their vehicles, thus even though this code may be slow by our standards, the route would still be perfectly lit by the time the responders departed their station.
+
+      
+      
+      </p>
       
   </div>
 </div>
