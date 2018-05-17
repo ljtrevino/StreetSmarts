@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Code Description</title>
+	<link rel="stylesheet" type="text/css" href="home.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.1.1/superhero/bootstrap.min.css" rel="stylesheet" integrity="sha384-fiZOWGBt79dIbkt852eb24nKPxYOvAgtp4v4IUFozlwV/WkvlilK1oTVfPorZdV4" crossorigin="anonymous">
+    <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="index.html">StreetSmarts</a>
+  <button onclick="navbar()" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+<div class="collapse navbar-collapse" id="navbarColor03">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="index.html">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="map.html">Real-Time Map</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="documentation.html">Documentation</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="code.html">Code Description</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="parts.html">Parts List</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="energy.html">Energy Management</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="design.html">Design Challenges</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="future.html">Future Work<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="about.html">About the Creators</a>
+      </li>
+      </ul>
+  </div>
+</nav>
+
+<center><h1>Future Work</h1></center>
+    
+<div class="container">
+<p>Since we only had around 4 weeks to complete this project, there are a number of ideas and features that we would like to implement in order to further improve upon our project. Here we highlight a few of these features that would make our project even more robust and applicable in the real world:</p>
+    
+<div onclick="ExpandLamp()" class="card text-white bg-info mb-3" style="margin-top: 20px">
+  <div class="card-header bg-dark">Additional Emergency Types</div>
+  <div class="card-body" id="lamp" style="display:none;">
+<div class="card-text">
+   <p>A feature we would have liked to implement, if we had more time, was support for other emergencies. In a real life system, we would have police stations and hospitals included in the sources, and depending on the emergency, different responders would be called. The lamps would be able to fully utilize their RGB capability and change color based on the nature of the emergency.</p>
+  </div>
+</div>
+</div>
+    
+   
+<div onclick="ExpandResponder()" class="card text-white bg-success mb-3" style="margin-top: 20px">
+  <div class="card-header bg-dark">More Lamps</div>
+  <div class="card-body" id="responder" style="display:none;">
+<div class="card-text">
+    
+      <p>A real system implemented in a city like Cambridge would involve a much larger quantity of street lamps. It is estimated that the US alone has <a target="_blank" href="https://www.bostonglobe.com/opinion/2012/08/02/podiumstreetlight/9qVaAubIxU0j27bcavREaK/story.html">26 million street lamps</a>, much more than the 31 that we implemented. It would be very interesting to see how a system like this scales to a larger neighborhood, town, or even a metro area.</p>
+    
+  </div>
+</div>
+</div>
+    
+<div onclick="ExpandPath()" class="card text-white bg-warning mb-3" style="margin-top: 20px">
+  <div class="card-header bg-dark">More Efficient API Use</div>
+  <div class="card-body" id="pathfinder" style="display:none;">
+<div class="card-text">
+
+<p>Since the Google Distance Matrix API was such a pain point, it would be very interesting to see if we could create a more efficient use. For example, configuring the server to automatically query the API every minute or so, then running the Dijkstra algorithm on the most updated data, rather than just querying the API every time there is a request. This would also lead to much improved pathfinding speeds, and every second matters with emergencies. This wasn’t something we could implement on the 6.08 server since the code only runs when receiving a request, but it would be fun to set up.</p>
+    
+  </div>
+</div>
+</div>
+    
+<div onclick="ExpandID()" class="card text-white bg-primary mb-3" style="margin-top: 20px">
+  <div class="card-header bg-dark">RGB Lighting in Demo Map</div>
+  <div class="card-body" id="ID" style="display:none;">
+<div class="card-text">
+    
+    <p>Our mini map currently has a red LED to represent the fire station, but the rest of the LEDs are purely white. In continuation of the “additional emergency types” expansion, the ability to address all of our LEDs and control their color would be something interesting and cool. With our limited time, figuring this out would have been more pain than it would be worth, but as a future project it would be fun. This would also allow us to not have the fire station location hardwired in with the red LED, and allow us to add many other cool additional features.</p>
+    
+  </div>
+</div>
+    
+
+
+</div>   
+</div>    
+</body>
+    
+<script>
+    
+function ExpandID() {
+    var x = document.getElementById("ID");
+    if (x.style.display === "none") {
+        x.style.display = "block";
+    } else {
+        x.style.display = "none";
+    }
+}   
+    
+function ExpandResponder() {
+    var x = document.getElementById("responder");
+    if (x.style.display === "none") {
+        x.style.display = "block";
+    } else {
+        x.style.display = "none";
+    }
+} 
+    
+function ExpandLamp() {
+    var x = document.getElementById("lamp");
+    if (x.style.display === "none") {
+        x.style.display = "block";
+    } else {
+        x.style.display = "none";
+    }
+} 
+   
+function ExpandPath() {
+    var x = document.getElementById("pathfinder");
+    if (x.style.display === "none") {
+        x.style.display = "block";
+    } else {
+        x.style.display = "none";
+    }
+} 
+    
+function navbar() {
+    var x = document.getElementById("navbarColor03");
+    if (x.className === "collapse navbar-collapse") {
+        x.className = "navbar-collapse";
+    } else {
+        x.className = "collapse navbar-collapse";
+    } 
+   }
+    
+</script>    
+    
+</html>
