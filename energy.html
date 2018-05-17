@@ -54,7 +54,7 @@
     
     <li>Further, voice commands work in a similar way.  The ESP only listens for voice commands after motion is detected.  This way, the device does not need to use up space recording nothing.  Additionally, it conserves energy as no power needs to be supplied to the microphone until motion is sensed.</li>
     
-    <li>Originally, since our pathfinder.py takes up to 15 seconds to complete, the ESP module would have to keep a connection open to the server for that full time every time it did a request. Fortunately, we were able to partially solve this problem by implementing a second table in our database that stores a path once it is calculated. In other words, we only have to run pathfinder.py once every time an emergency is posted, and each following request simply has to query the database, shaving 15 seconds into under a quarter second. This also means the server isn't running expensive code nearly as often, saving (a tiny bit of ) power at the server location as well. </li>
+    <li>Originally, since our pathfinder.py takes up to 15 seconds to complete, the ESP module would have to keep a connection open to the server for that full time every time it did a request. Fortunately, we were able to partially solve this problem by implementing a second table in our database that stores a path once it is calculated. In other words, we only have to run pathfinder.py once every time an emergency is posted, and each following request simply has to query the database, shaving 15 seconds into under a quarter second. This also means the server isn't running expensive code nearly as often, saving (a tiny bit of) power at the server location as well. </li>
 </ul>
     
     

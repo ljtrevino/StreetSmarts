@@ -54,7 +54,7 @@
   <div class="card-body" id="ExpandER2" style="display:none;">
     <p class="card-text">This is the piece of code that ties everything together. It's configured to accept 7 different types of requests, either updating or returning data from a central database for the 31 lamps. The database has a row for each lamp, and looks something like this:</p>
     <center>
-      <table class="table table-striped table-bordered bg-dark" style="max-width: 30vw">
+      <table class="table table-striped table-bordered table-hover table-sm bg-dark" style="max-width: 30vw">
     <thead>
         <tr class="table-dark" style="text-align: center;">
             <th>ID</th>
@@ -152,7 +152,7 @@
         <div class="card text-white bg-info">
           <div class="card-header">GET from <code style="color:whitesmoke">ID_to_arrayNEW.ino</code></div>
           <div class="card-body">
-            <p class="card-text">This is the code to control the laser-cut demonstration board with 31 LEDs, so it needs to return each ID that needs to be lit up. The easiest way to parse this in C++ seemed to be just separate IDs by spaces rather than return a string of a Python list. To do so, the function calls the function that would do a GET from `responder.ino` and processes the returned path into IDs with spaces between, then returns that to the ESP32. </p>
+            <p class="card-text">This is the code to control the laser-cut demonstration board with 31 LEDs, so it needs to return each ID that needs to be lit up. The easiest way to parse this in C++ seemed to be just separate IDs by spaces rather than return a string of a Python list. To do so, the function calls the function that would do a GET from <code style="color:whitesmoke">responder.ino</code> and processes the returned path into IDs with spaces between, then returns that to the ESP32. </p>
           </div>
         </div>
         
@@ -162,7 +162,7 @@
         <div class="card text-white bg-info">
           <div class="card-header">GET from <code style="color:whitesmoke">responder.ino</code></div>
           <div class="card-body">
-            <p class="card-text">This is the trickiest bit of code. First, it queries the database to find out if there are currently any emergencies. If it doesn't find any, it simply returns that there are "No emergencies currently." If there is an emergency, it checks to see if the path has already been calculated to the emergency and saved into the `path` table in the database. If so, it simply returns that path. If not, it sends a request to `pathfinder.py`, asking for the shortest path between the fire station and the location of the fire. Finally, it stores the calculated path in the `path` table of the database so that future GET requests don't have to wait for the entire pathfinder code to run, and can instead immediately return the already-calculated path for next time.</p>
+            <p class="card-text">This is the trickiest bit of code. First, it queries the database to find out if there are currently any emergencies. If it doesn't find any, it simply returns that there are "No emergencies currently." If there is an emergency, it checks to see if the path has already been calculated to the emergency and saved into the <code style="color:whitesmoke">path</code> table in the database. If so, it simply returns that path. If not, it sends a request to <code style="color:whitesmoke">pathfinder.py</code>, asking for the shortest path between the fire station and the location of the fire. Finally, it stores the calculated path in the <code style="color:whitesmoke">path</code> table of the database so that future GET requests don't have to wait for the entire pathfinder code to run, and can instead immediately return the already-calculated path for next time.</p>
           </div>
         </div>
     </div>
@@ -187,7 +187,7 @@
       
     <h5>Dimming Control</h5>
 
-<p>When motion isn't detected for 10 seconds, `lamp.ino` sends a request to the server code to set the lamp brightness to 0.1. If it then detects motion again, it sends a request to set the brightness to 0.5 (100% brightness was way too bright for something so close to our eyes)</p>
+<p>When motion isn't detected for 10 seconds, <code style="color:whitesmoke">lamp.ino</code> sends a request to the server code to set the lamp brightness to 0.1. If it then detects motion again, it sends a request to set the brightness to 0.5 (100% brightness was way too bright for something so close to our eyes)</p>
   </div>
 </div>
 </div>
