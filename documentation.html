@@ -70,19 +70,19 @@
       <p>The mini map is a model indicating which street lamps would light up in the shortest path to an emergency location.  It is an actual map of the area north of the MIT campus along Massachuestts Avenue.</p>
         
 <h4><u> Mapping of Lamp IDs to GPS coordinates</u></h4>
-    <center><img src="IDMappings.jpg"/></center>
+    <center><img style="max-width: 100%; height: auto; width: auto\9;" src="IDMappings.jpg"/></center>
     
 <h4 style="margin-top:20px"><u> Fabrication </u></h4>
     <p>The map itself was raster engraved and the box below was cut, both using a laser cutter. All the faces except the top face of the box are glued together, leaving the top easily removable so the wiring, ESP, and battery can easily be accessed by lifting off the top of the box.  The holes for the LEDs are also laser cut into the map.</p>
 
-    <center><img src="minimapresized.jpg"/></center>
+    <center><img style="max-width: 100%; height: auto; width: auto\9;" src="minimapresized.jpg"/></center>
     
 <h4 style="margin-top:20px"><u> Wiring </u></h4>
     <p>The ESP has 21 usable pins that can be utilized to work as simple GPIOs. This is because some of the pins are devoted to restart and indication functionality.  Given that we have 31 lamp post IDs, the first 16 GPIO pins were connected directly to the LEDs, but the last 5 pins needed to be charlieplexed in order to control the remaining 15 LEDs.  </p>
     
     <p>Charlieplexing exploits the fact that LEDs can only operate in one direction due to the nature of them being a diode. So if you organize LEDs in a specific pattern you can ensure that you are able to turn on a specific LED if you are careful about the coding. The 5 control pins for the Charlieplexer were pin 13, pin 14,  pin 2, pin 16,  and pin 17. These pins correspond to the diagram below respectively as pin 1, pin 2, pin 3, pin 4, and pin 5 and it details specifically how the connections are made. Note that with 5 pins we could have theoretically been able to control 5*(5-1) pins but we only needed 15 pins to control the 15 LEDs, so not all of them were used, only LED7-LED20 (inclusive) were used.</p>
     
-    <center><img src="wiringimageresized.jpg"/></center>
+    <center><img style="max-width: 100%; height: auto; width: auto\9;" src="wiringimageresized.jpg"/></center>
     
     </div>
   </div>
@@ -99,10 +99,10 @@
     
 <div class="row">
         <div class="col">
-            <center><img src="lampside.jpg"></center>
+            <center><img style="max-width: 100%; height: auto; width: auto\9;" src="lampside.jpg"></center>
         </div>
         <div class="col">
-            <center><img src="lampabove.jpg"></center>
+            <center><img style="max-width: 100%; height: auto; width: auto\9;" src="lampabove.jpg"></center>
         </div>
 </div>
         
@@ -126,7 +126,7 @@
   <div class="card-body" id="SMD" style="display:none;">
 <div class="card-text">
 
-    <center><img src="statemachine.jpg"/></center>
+    <center><img style="max-width: 100%; height: auto; width: auto\9;" src="statemachine.jpg"/></center>
 
     
     </div>
@@ -139,7 +139,7 @@
   <div class="card-body" id="SBD" style="display:none;">
 <div class="card-text">
 
-    <center><img src="systemblock.jpg"/></center>
+    <center><img style="max-width: 100%; height: auto; width: auto\9;" src="systemblock.jpg"/></center>
 
     
     </div>
