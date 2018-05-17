@@ -64,8 +64,9 @@ function changeColor(){
     color_index += 1;
     color_index %= 3;
     document.getElementById("lamp").setAttribute("class", colors[color_index]);
-    document.getElementById("name").setAttribute("class", names[color_index]);
+//    document.getElementById("name").setAttribute("class", names[color_index]);
     document.getElementById("logo").src = srcimgs[color_index];
+    console.log(getElementById("logo").src)
 };
     
 function navbar() {
