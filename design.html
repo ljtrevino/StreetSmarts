@@ -44,7 +44,7 @@
 <center><h1>Design Challenges</h1></center>
     
 <div class="container">
-<p>There were a series of challenges we encountered during this project, here we highlight a few of the most difficult aspects of our project</p>
+<p>There were a series of challenges we encountered during this project. Here we highlight a few of the most difficult aspects of our project:</p>
 
 <div onclick="ExpandIO()" class="card bg-danger mb-3" style="">
   <div class="card-header bg-dark">Wiring of the Board & I/O Pins</div>
@@ -58,7 +58,7 @@
 
     
 <div onclick="ExpandAPI()" class="card bg-primary mb-3" style="">
-  <div class="card-header bg-dark">Efficiency & APIs</div>
+  <div class="card-header bg-dark">Efficiency & Google Distance Matrix API</div>
   <div class="card-body" id="API" style="display:none;">
     
       <p class="card-text">
@@ -70,6 +70,21 @@
       
   </div>
 </div>
+    
+    
+<div onclick="ExpandLIFX()" class="card bg-danger mb-3" style="">
+  <div class="card-header bg-dark">LIFX API & Wifi</div>
+  <div class="card-body" id="LIFX" style="display:none;">
+    
+      <p class="card-text">
+
+      One challenge with LIFX API is that it cannot connect to public Wifi Networks in order to ensure a secure and reliable network connection. When we first encountered this problem we first assumed that the Bulb was broken for a couple days because it couldn’t connect to the internet in order to be used by the API. This problem was solved, however, by testing our bulb to different networks and eventually connecting the Bulb to one of our group members personal hotspots seemed to work. In the future we would want to ensure that each bulb has the capability to have either its own secure wireless connection, to prevent tampering by outside parties, or have some type of internet cable that can run up the lamp post to transfer information from the internet.  
+      
+      </p>
+      
+  </div>
+</div>
+    
     
 </div>
 </body>
@@ -86,6 +101,15 @@ function ExpandIO() {
     
 function ExpandAPI() {
     var x = document.getElementById("API");
+    if (x.style.display === "none") {
+        x.style.display = "block";
+    } else {
+        x.style.display = "none";
+    }
+} 
+    
+function ExpandLIFX() {
+    var x = document.getElementById("LIFX");
     if (x.style.display === "none") {
         x.style.display = "block";
     } else {
