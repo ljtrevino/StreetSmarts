@@ -53,14 +53,40 @@
     
 <div class="container">
 <p>Due to the nature of our project, energy management was difficult to incorporate.  Emergency devices need to constantly update in order to ensure that a person in need of help can be assisted as soon as possible, and street lamps are connected to the grid the vast majority of the time.  That being said, we did find multiple ways to make sure energy is not wasted:</p>
+    
+<div onclick="ExpandLamp()" class="card text-white bg-info mb-3" style="margin-top: 20px">
+  <div class="card-header bg-dark">Lamp Dimming</div>
+  <div class="card-body" id="lamp" style="display:none;">
+<div class="card-text">
+   <p>Our lamp is programmed to dim to 0.1 brightness when no motion is detected.  Thus, it still is bright enough to provide light, without wasting too much electricity.  If motion is detected, the bulb transitions to 0.5 brightness.  Once the sensor detects no activity for ten seconds, the bulb dims once again and conserves energy.</p>
+  </div>
+</div>
+</div>
+    
+   
+<div onclick="ExpandResponder()" class="card text-white bg-success mb-3" style="margin-top: 20px">
+  <div class="card-header bg-dark">Voice Detection</div>
+  <div class="card-body" id="responder" style="display:none;">
+<div class="card-text">
+    
+      <p>Further, voice commands work in a similar way.  The ESP only listens for voice commands after motion is detected.  This way, the device does not need to use up space recording nothing.  Additionally, it conserves energy as no power needs to be supplied to the microphone until motion is sensed.</p>
+    
+  </div>
+</div>
+</div>
+    
+<div onclick="ExpandPath()" class="card text-white bg-warning mb-3" style="margin-top: 20px">
+  <div class="card-header bg-dark">Request Efficiency</div>
+  <div class="card-body" id="pathfinder" style="display:none;">
+<div class="card-text">
 
-<ul>
-    <li style="padding-bottom:20px;">Our lamp is programmed to dim to 0.1 brightness when no motion is detected.  Thus, it still is bright enough to provide light, without wasting too much electricity.  If motion is detected, the bulb transitions to 0.5 brightness.  Once the sensor detects no activity for ten seconds, the bulb dims once again and conserves energy.</li>
+<p>Originally, since our pathfinder.py takes up to 15 seconds to complete, the ESP module would have to keep a connection open to the server for that full time every time it did a request. Fortunately, we were able to partially solve this problem by implementing a second table in our database that stores a path once it is calculated. In other words, we only have to run pathfinder.py once every time an emergency is posted, and each following request simply has to query the database, shaving 15 seconds into under a quarter second. This also means the server isn't running expensive code nearly as often, saving (a tiny bit of) power at the server location as well. </p>
     
-    <li style="padding-bottom:20px;">Further, voice commands work in a similar way.  The ESP only listens for voice commands after motion is detected.  This way, the device does not need to use up space recording nothing.  Additionally, it conserves energy as no power needs to be supplied to the microphone until motion is sensed.</li>
+  </div>
+</div>
+</div>
     
-    <li style="padding-bottom:20px;">Originally, since our pathfinder.py takes up to 15 seconds to complete, the ESP module would have to keep a connection open to the server for that full time every time it did a request. Fortunately, we were able to partially solve this problem by implementing a second table in our database that stores a path once it is calculated. In other words, we only have to run pathfinder.py once every time an emergency is posted, and each following request simply has to query the database, shaving 15 seconds into under a quarter second. This also means the server isn't running expensive code nearly as often, saving (a tiny bit of) power at the server location as well. </li>
-</ul>
+    
     
     
 </div>
@@ -74,6 +100,33 @@
         x.className = "collapse navbar-collapse";
     } 
    }
+    
+    function ExpandResponder() {
+    var x = document.getElementById("responder");
+    if (x.style.display === "none") {
+        x.style.display = "block";
+    } else {
+        x.style.display = "none";
+    }
+} 
+    
+function ExpandLamp() {
+    var x = document.getElementById("lamp");
+    if (x.style.display === "none") {
+        x.style.display = "block";
+    } else {
+        x.style.display = "none";
+    }
+} 
+   
+function ExpandPath() {
+    var x = document.getElementById("pathfinder");
+    if (x.style.display === "none") {
+        x.style.display = "block";
+    } else {
+        x.style.display = "none";
+    }
+} 
     
 </script>
     
